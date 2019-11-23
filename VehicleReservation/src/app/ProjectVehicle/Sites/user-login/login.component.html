@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Homepage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="wrapper fadeInDown">
+            <div id="formContent">
+          <h5 style="margin-top: 15px;margin-top:20px;margin-block-start: 10px;"><b>Vehicle Registration System</b></h5>
+            
+
+          
+              <form (ngSubmit)="onSubmit(username.value,password.value)" #loginForm="ngForm">
+                    <div class="form-group">
+                        <p class="center alert alert-danger" style="margin-top:15px;text-align:center" *ngIf="flag==true">Incorrect MemberID or Password</p>
+                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login" #username required>
+                   </div>
+                   <div class="form-group">
+                   <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" #password required> 
+                  </div>
+                <input type="submit" class="fadeIn fourth" value="Log In">
+              </form>
+          
+            
+          
+            </div>
+          </div>
+</body>
+</html>

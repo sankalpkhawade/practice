@@ -1,0 +1,143 @@
+<html>
+<head>
+    <title>Homepage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Vehicle Registration System</a>
+                <ul class="nav navbar-nav navbar-right">
+                        <li><a routerLink="/Home/"><span style="margin-left:800px;">Go back to Homepage</span> </a></li>
+                    </ul>
+            </div>
+            <ul class="nav navbar-nav"></ul>
+        </div>
+    </nav>
+
+    <div class="row" style="margin-left:0px;">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+          
+                
+                <form (ngSubmit)="add(userNew)" #register="ngForm" *ngIf="!flag">
+                        <h2>Register Page</h2>
+                        <div class="form-group" [class.has-error]="memberid.invalid && memberid.touched" [class.has-success]="memberid.valid" >
+                                <label for="memberid">Member ID :</label>
+                                  <input required type="text" name="memberid" [(ngModel)]="userNew.memberId"
+                                        #memberid="ngModel" id="memberid" class="form-control" pattern="[A-Za-z0-9]+" placeholder="Enter MemberID" >
+                                    <span class="help-block" *ngIf="memberid.invalid && memberid.touched">
+                                          Member Id is Required
+                                    </span> 
+                              </div>
+                             <div class="form-group" [class.has-error]="firstname.invalid && firstname.touched" [class.has-success]="firstname.valid">
+                                 <label for="firstname"><b>First Name</b></label>
+                                    <input required type="text" name="firstname" [(ngModel)]="userNew.firstName"
+                                        #firstname="ngModel" id="firstname" class="form-control" pattern="[A-Za-z ]+" placeholder="Enter firstname" >
+                                        <span class="help-block" *ngIf="firstname.invalid && firstname.touched">
+                                            First Name is Required
+                                       </span>
+                              </div>
+                               <div class="form-group" [class.has-error]="lastname.invalid && lastname.touched" [class.has-success]="lastname.valid">
+                                   <label for="lastname"><b>Last Name</b></label>
+                                     <input required type="text" name="lastname" [(ngModel)]="userNew.lastName"
+                                          #lastname="ngModel" id="lastname" class="form-control" pattern="[A-Za-z ]+" placeholder="Enter lastname" >
+                                          <span class="help-block" *ngIf="lastname.invalid && lastname.touched">
+                                              Last Name is Required
+                                           </span>
+                                      </div>
+                                      <div class="form-group" [class.has-error]="Age.invalid && Age.touched" [class.has-success]="Age.valid">
+                                          <label for="Age"><b>Age</b></label>
+                                          <input required type="text" name="Age" [(ngModel)]="userNew.age"
+                                          #Age="ngModel" id="Age" class="form-control" pattern="^([1-9]|[1-8][0-9]|9[0-9]|100)$" placeholder="Enter age" >
+                                          <span class="help-block" *ngIf="Age.invalid && Age.touched">
+                                                 Age is Required
+                                               </span>
+                                      </div>
+                  
+                                      <div class="form-check-inline">
+                                          <label class="form-check-label">
+                                              <label for="gen"><b>Enter your Gender</b></label>
+                                              <input type="radio" class="form-check-input" id="active" name="active" value="Yes" [(ngModel)]="userNew.gender" >Male
+                                              <input type="radio" class="form-check-input" id="active" name="active"  value="No" [(ngModel)]="userNew.gender">Female
+                                          </label>
+                                      </div>
+                                              
+                                      <div class="form-group" [class.has-error]="Contact.invalid && Contact.touched" [class.has-success]="Contact.valid">
+                                          <label for="Contact"><b>Contact Number</b></label>
+                                          <input  required type="number" name="Contact" [(ngModel)]="userNew.contactNo"
+                                          #Contact="ngModel" id="Contact" class="form-control" pattern="^[1-9]{2}[0-9]{8}$" placeholder="Enter your contact number" >
+                                          <span class="help-block" *ngIf="Contact.invalid && Contact.touched">
+                                              contactNumber is Required
+                                                </span>
+                                      </div>
+                  
+                                      <div class="form-group" [class.has-error]="mail.invalid && mail.touched" [class.has-success]="mail.valid">
+                                          <label for="mail"><b>E-Mail ID</b></label>
+                                          <input required type="email" name="mail" [(ngModel)]="userNew.email"
+                                          #mail="ngModel" id="mail" class="form-control" pattern="^[a-z0-9][-a-z0-9._]+@([-a-z0-9]+\.)+[a-z]{2,5}$" placeholder="Enter your Email ID" >
+                                          <span class="help-block" *ngIf="mail.invalid && mail.touched">
+                                                  Email is Required
+                                                    </span>
+                                      </div>
+                  
+                                      <div class="form-group" [class.has-error]="password.invalid && password.touched" [class.has-success]="password.valid">
+                                          <label for="password"><b>Password</b></label>
+                                          <input type="password"  name="password" [(ngModel)]="userNew.pass"
+                                          #password="ngModel" id="password" class="form-control" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{4,}$" required>
+                                          <span class="help-block" *ngIf="password.invalid && password.touched">
+                                                 password is Required
+                                                    </span>
+                                      </div>
+                
+                                      <div class="form-group" [class.has-error]="branch.invalid && branch.touched" [class.has-success]="branch.valid">
+                                            <label for="branch"><b>Branch</b></label>
+                                              <input required type="text" name="branch" [(ngModel)]="userNew.branch"
+                                                   #branch="ngModel" id="lastname" class="form-control" pattern="[A-Za-z ]+" placeholder="Enter branch" >
+                                                   <span class="help-block" *ngIf="branch.invalid && branch.touched">
+                                                       Branch is Required
+                                                    </span>
+                                               </div>
+                                      <div class="form-group">
+                                          <label for="item_genre"><b>Role</b></label>
+                  
+                                          <select class="form-control" id="item_genre" name="item_genre" [(ngModel)]="userNew.roles">
+                                              <option>User</option>
+                                              <option>Admin</option>
+                  
+                                          </select>
+                                          </div>
+                                          <div class="form-group" >
+                                              <!-- <label for="Appro"><b>Approval</b></label> -->
+                                              <input type="text" class="form-control" id="Appro" name="Appro" hidden [(ngModel)]="userNew.approval" disabled >
+                                          </div>
+                  
+                                      <button type="submit" class="btn btn-primary" [disabled]="register.invalid">Register</button>
+                                  </form>
+            </div>
+        </div>
+        <div class="container" *ngIf="flag">
+                <div class=row>
+                        <div class="col-lg-3">
+                        </div>
+                <div class="col-lg-6">
+                    <div class="alert alert-success">
+                            <strong>Success!</strong> Registration Successfully!. Now wait for the Admin team to review your request and Approve.
+                    </div>
+                </div>                
+                   </div>
+                </div>
+</body>
+
+
+
+</html>

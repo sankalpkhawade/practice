@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>Homepage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+        .container {
+        margin-top:20px;
+        margin-left:20px;    
+        float:left;
+        border:1px solid;
+        padding-bottom:20px;
+        padding-top:20px;
+        }
+.button{
+    float:right;
+    padding-right: 10px;
+}
+        h2 {
+            margin-left:20px;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">House Of Rentals</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/Admin/">Dashboard</a>
+            </li>    
+          </ul>
+        </div>
+        </nav>
+    <div class="row">
+
+        <div class="col-lg-10">
+            <h2>View Request</h2>
+            <div *ngFor="let item of filteredItems | async">
+                <div *ngIf="item.roles=='User'&& item.approval==0">
+               
+            <div class="container" style="border-color:orange; border:solid 3px">
+
+                <table class="table table-condensed" style="background-color:paleturquoise;">
+                    <thead>
+                        <tr>
+                            <th>Firstname : <b>{{item.firstName}}</b></th>
+                            <th>Lastname : <b>{{item.lastName}}</b></th>
+                            <th>Email : <b>{{item.email}}</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Member ID: {{item.memberId}}</td>
+                            <td>Age: {{item.age}}</td>
+                            <td>Branch: {{item.branch}}</td>
+                        </tr>
+                       
+                </table>
+                <a  (click)="RejectUser(item)"  class="btn btn-danger button" style="margin-left:10px">Reject</a>
+                <a  (click)="Accept(item)" class="btn btn-success button"> Accept</a>
+            </div>
+               </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<html>
+<head>
+    <title>Homepage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">House Of Rentals</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/Admin/">Dashboard</a>
+            </li>  
+          </ul>
+        </div>
+        </nav>
+
+    <div class="row" style="margin-left:0px;">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+
+           
+            <form (ngSubmit)="addVehicle(Vehicleitem)" #editform="ngForm" *ngIf="!flag">
+                    <h2>Add New Vehicle</h2>
+                <div class="form-group" [class.has-error]="mem.invalid && mem.touched" [class.has-success]="mem.valid">
+                    <label for="mem"><b>Vehicle Number</b></label>
+                    <input required type="text"   name="mem"  [(ngModel)]="Vehicleitem.vehicleNo"
+                    #mem = "ngModel" id="mem" class="form-control"   placeholder="Enter Vehicle Number" >
+                    <span class="help-block" *ngIf="mem.invalid && mem.touched">
+                        Vehicle Number is Required
+                     </span>
+                </div>
+               
+               <div class="form-group" [class.has-error]="branch.invalid && branch.touched" [class.has-success]="branch.valid">
+                    <label for="branch"><b>Branch</b></label>
+                    <input type="text" class="form-control" id="branch" name="branch" placeholder="Enter the branch" #branch = "ngModel" [(ngModel)]="Vehicleitem.branch" required> 
+                    <span class="help-block" *ngIf="branch.invalid && branch.touched">
+                            Branch is Required
+                         </span>
+                </div> 
+                <div class="form-group" [class.has-error]="vt.invalid && vt.touched" [class.has-success]="vt.valid">
+                    <label for="vt"><b>Vehicle Type</b></label>
+                    <input type="text" class="form-control" id="vt" name="vt" placeholder="Enter vehicle type"  #vt = "ngModel"  [(ngModel)]="Vehicleitem.vehicleType" required>
+                    <span class="help-block" *ngIf="vt.invalid && vt.touched">
+                            Vehicle Type is Required
+                         </span>
+                </div>
+                <div class="form-group"  [class.has-error]="ins.invalid && ins.touched" [class.has-success]="ins.valid">
+                    <label for="ins"><b>Enter Insurance Expiry Date</b></label>
+                    <input type="date" class="form-control" id="ins" name="ins" placeholder="Enter Insurance Expiry date" #ins = "ngModel"  [(ngModel)]="Vehicleitem.insuranceExpiryDate" required min="2019-11-13"> 
+                    <span class="help-block" *ngIf="ins.invalid && ins.touched">
+                            insuranceExpiryDate is Required
+                         </span>
+                </div>
+
+                <div class="form-group"  [class.has-error]="las.invalid && las.touched" [class.has-success]="las.valid">
+                    <label for="las"><b>Enter Last Serviced Date </b></label>
+                    <input type="date" class="form-control" id="las" name="las" placeholder="Enter last serviced date" #las = "ngModel" [(ngModel)]="Vehicleitem.lastServicedDate" required max="2019-11-13">
+                    <span class="help-block" *ngIf="las.invalid && las.touched">
+                            lastServicedDate is Required
+                         </span>
+                </div>
+
+                <div class="form-group"  [class.has-error]="ser.invalid && ser.touched" [class.has-success]="vt.valid">
+                    <label for="ser"><b>Service Due Date</b></label>
+                    <input type="date" class="form-control" id="con" name="ser" placeholder="Enter service due date" #ser = "ngModel" [(ngModel)]="Vehicleitem.serviceDueDate" required min="2019-11-13">
+                    <span class="help-block" *ngIf="ser.invalid && ser.touched">
+                           serviceDueDate is Required
+                         </span>
+                </div>
+
+                <div class="form-check" >
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="active" name="active"  [(ngModel)]="Vehicleitem.active" #active="ngModel" required>
+                        <label for="item_has_teaser"><b>Vehicle Active</b></label>
+                    </label>
+                   
+                </div>
+
+                <div class="form-group"  [class.has-error]="price.invalid && price.touched" [class.has-success]="price.valid">
+                    <label for="price"><b>Price</b></label>
+                    <input type="number" class="form-control" id="price" name="price" placeholder="Enter the price" #price = "ngModel" [(ngModel)]="Vehicleitem.price" required>
+                    <span class="help-block" *ngIf="price.invalid && price.touched">
+                            Price is Required
+                         </span>
+                </div>
+
+                <div class="form-group"  [class.has-error]="photo.invalid && photo.touched" [class.has-success]="photo.valid">
+                    <label for="pwd"><b>Photopath</b></label>
+                    <input type="text" class="form-control" id="photo" name="photo" placeholder="Enter the photopath" #photo = "ngModel" [(ngModel)]="Vehicleitem.photopath" required>
+                    <span class="help-block" *ngIf="photo.invalid && photo.touched">
+                            Vehicle Type is Required
+                         </span>
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="editform.invalid">Add Vehicle</button>
+            </form>
+        </div>
+    </div>
+    <div class="container" *ngIf="flag">
+            <div class=row>
+                    <div class="col-lg-3">
+                    </div>
+            <div class="col-lg-6">
+                <div class="alert alert-success">
+                        <strong>Success!</strong> Vehicle added Successfully!. Click <a routerLink="/Admin/">here</a> to go view the vehicles.
+                </div>
+            </div>                
+               </div>
+            </div>
+</body>
+
+
+
+</html>

@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        .container {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            padding-left: 0;
+            padding-right: 0;
+            display:block;
+     
+        }
+        .cards {
+            width: 350px;
+            margin-left: 40px;
+            margin-top:40px;
+        }
+
+            .sidebar a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidebar a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidebar .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+           
+        }
+
+            .openbtn:hover {
+                background-color: #000;
+            }
+
+        #main {
+            transition: margin-left .2s;
+               }
+
+
+        @media screen and (max-height: 450px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+
+                .sidebar a {
+                    font-size: 18px;
+                }
+        }
+        .font
+        {
+            font-size:20px ;
+        }
+        .search
+        {
+            margin-left:550px;
+            width:100%; 
+        }
+
+        .img{
+            width:350px;
+            height:250px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">×</a>
+        <a routerLink="/AddVehicle/">Add New Vehicle</a>
+        <a routerLink="/Request/">View Request</a>
+    </div>
+
+
+    
+    <div id="main">
+     
+            <span><button class="openbtn button btn-block col-xs-12" (click)="openNav()"><span style="float:left"> ☰ </span>Vehicle Registration System <span><button routerLink ="/Home/"class="btn btn-sm btn-primary float-right">Logout</button></span></button></span>
+    
+       
+     </div>
+
+    <div style="font-size:32px;margin-left:30px;margin-top:10px">
+        Vehicle List - Admin View
+    </div>
+
+    <div class="row">
+            <div class="col-xs-4" *ngFor="let item  of  filteredItems|async" style="margin-right:30px">
+                <div class="card cards" >
+                    <img class="card-img-top card-image img" [src]=item.photopath alt="Card image" style="width:100%">
+                    <div class="card-body">
+                      
+                        <span class="card-title">Vehicle Type: <b>{{item.vehicleType}}</b></span><span class="float-right">Vehicle No :<b>{{item.vehicleNo}}</b></span><span class="float-right">{{item.Branch}}</span>
+                    
+                        <label class="mt-2 text-secondary">Insurance Expiry Date : <span class="badge">{{item.insuranceExpiryDate|date}}</span></label>
+                         <label class="mt-2 text-secondary">Last Serviced Date :   <span class="badge">{{item.lastServicedDate |date}}</span></label>
+                         <label class="mt-2 text-secondary">Service Due Date :     <span class="badge">{{item.serviceDueDate|date}}</span></label>
+                        
+                      
+                            <span class="badge badge-danger mt-2" style="float:right" *ngIf="item.active==1">InActive</span>
+                            <span class="badge badge-success mt-2" style="float:right" *ngIf="item.active==0">Active</span>
+                            <div class="mt-1 text-decoration large">Price:<b>{{item.price|currency}}</b></div>
+                        
+                       
+                        <span class="float-left"><a routerLink="/Edit/{{item.vehicleNo}}/" class="btn btn-primary">Edit</a></span>
+                        <span class="float-right"><a (click)="delete(item)" class="btn btn-danger" style="color:whitesmoke">Delete</a></span>
+                         
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+
+</body>
+</html>
+

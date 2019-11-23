@@ -1,0 +1,30 @@
+ body{
+    background-image: url("/assets/carbg.jpg");
+    background-repeat: no-repeat repeat;
+    background-size: cover;
+    height: 925px;
+}
+
+/*
+.navbar{
+    background-image: url("/assets/images.jpg");
+    background-repeat: no-repeat repeat;
+    background-size: cover;
+}
+
+.fontcol{
+    color:white;
+} 
+
+*/
+
+.content-home{
+    color: white;
+    margin-left:20px;
+    width: 500px;
+    height: 100px;
+    background:white;
+    
+  
+}
+
